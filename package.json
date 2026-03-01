@@ -27,12 +27,22 @@
         "command": "snippet-manager.unload-config",
         "title": "Unload",
         "icon": "$(trash)"
+      },
+      {
+        "command": "snippet-manager.force-sync",
+        "title": "Force Sync",
+        "icon": "$(refresh)"
       }
     ],
     "menus": {
       "view/title": [
         {
           "command": "snippet-manager.load-config",
+          "when": "view == snippet-manager.loaded-configs",
+          "group": "navigation"
+        },
+        {
+          "command": "snippet-manager.force-sync",
           "when": "view == snippet-manager.loaded-configs",
           "group": "navigation"
         }

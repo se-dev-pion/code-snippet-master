@@ -11,7 +11,7 @@ export class UnloadConfigCommand extends CommandTemplate {
     }
     override id = CommandID.UnloadConfig;
     override call(item: SnippetConfigItem) {
-        UnloadConfigCommand._callbacks.map(f => f(item.id));
+        UnloadConfigCommand._callbacks.forEach(f => f(item.id));
     }
     private static _callbacks = new Array<(id: UUID) => void>();
     public static addCallback(f: (id: UUID) => void) {

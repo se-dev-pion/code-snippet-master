@@ -20,6 +20,7 @@ export class SnippetConfigItem extends vscode.TreeItem {
 }
 
 class LoadedConfigsDataProvider extends ObservableTreeDataProviderTemplate<SnippetConfigItem> {
+    private timer: NodeJS.Timeout | null = null;
     public constructor(
         private data = {} as Record<UUID, SnippetConfigItem>,
         private orders = {} as Record<UUID, number>
@@ -56,23 +57,28 @@ class LoadedConfigsDataProvider extends ObservableTreeDataProviderTemplate<Snipp
     }
     public sync(context: vscode.ExtensionContext) {
         this.load(context);
-        setInterval(
-            () => {
-                this.load(context);
-            },
-            1000 * 60 * 60
-        );
+        this.timer =
+            this.timer ||
+            setInterval(
+                () => {
+                    this.load(context);
+                },
+                1000 * 60 * 60
+            );
     }
     private load(context: vscode.ExtensionContext) {
         this.data = {};
         this.orders = extensionConfigState.get(context);
         for (const [id, order] of Object.entries(this.orders) as [UUID, number][]) {
             const data = snippetConfigState.get(context, order);
-            if (!data) {
-                continue;
+            if (data) {
+                this.data[id] = new SnippetConfigItem(context, id, data);
+                snippetConfigState.set(context, order, data);
+            } else {
+                snippetConfigState.del(context, order);
             }
-            this.data[id] = new SnippetConfigItem(context, id, data);
         }
+        extensionConfigState.set(context, this.orders);
         this.refresh();
     }
 }
