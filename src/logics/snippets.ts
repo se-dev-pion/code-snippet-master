@@ -22,7 +22,7 @@ export function buildCompletionItem(config: SnippetConfigItem, language: string)
             return a.length >= b.length ? a : b;
         })
         .join('\n');
-    snippet.insertText = new vscode.SnippetString(text);
+    snippet.insertText = config.body['@_placeholder'] ? new vscode.SnippetString(text) : text;
     snippet.detail = config.description;
     return snippet;
 }

@@ -2,7 +2,10 @@ import { XMLParser } from 'fast-xml-parser';
 import { ZodType } from 'zod';
 
 export const xmlParser = new XMLParser({
-    ignoreAttributes: false
+    ignoreAttributes: false,
+    attributeValueProcessor(attrName, attrValue, jPath) {
+        return attrName === 'placeholder' ? eval(attrValue) : attrValue;
+    }
 });
 
 interface Deserializer {

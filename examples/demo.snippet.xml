@@ -426,4 +426,19 @@
     }
     ]]></body>
   </item>
+  <item>
+    <prefix>placeholder-test</prefix>
+    <description>Test TextMate placeholder syntax highlighting</description>
+    <body scope="*" placeholder="true"><![CDATA[
+    Simple tabstops: $1 $2 $0
+    Braced tabstops: ${1} ${2} ${0}
+    With default values: ${1:default} ${2:text here} ${3:sample value}
+    Variable names: ${TM_FILENAME} ${TM_SELECTED_TEXT} ${CLIPBOARD}
+    Variable with default: ${name:unknown} ${var:default value}
+    Choice placeholders: ${1|one,two,three|} ${2|apple,banana,orange|}
+    Nested placeholders: ${1:outer ${2:inner} text}
+    Mixed content: ${1:start} some text $2 middle ${3:end}
+    Escaped dollar: $$ = literal dollar sign
+    ]]></body>
+  </item>
 </root>

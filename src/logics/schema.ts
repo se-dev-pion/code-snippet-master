@@ -5,6 +5,7 @@ const snippetConfigItemSchema = z.object({
     description: z.string(),
     body: z.object({
         '@_scope': z.string(),
+        '@_placeholder': z.boolean().default(false),
         '#text': z.string()
     })
 });
