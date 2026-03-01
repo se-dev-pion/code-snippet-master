@@ -22,8 +22,7 @@ export class SnippetConfigItem extends vscode.TreeItem {
 class LoadedConfigsDataProvider extends ObservableTreeDataProviderTemplate<SnippetConfigItem> {
     public constructor(
         private data = {} as Record<UUID, SnippetConfigItem>,
-        private orders = {} as Record<UUID, number>,
-        private loaded = false
+        private orders = {} as Record<UUID, number>
     ) {
         super();
     }
@@ -55,10 +54,17 @@ class LoadedConfigsDataProvider extends ObservableTreeDataProviderTemplate<Snipp
         extensionConfigState.set(context, this.orders);
         snippetConfigState.del(context, order ?? maxSnippetConfigCountLimit); // handle if order is `undefined`
     }
-    public load(context: vscode.ExtensionContext) {
-        if (this.loaded) {
-            return;
-        }
+    public sync(context: vscode.ExtensionContext) {
+        this.load(context);
+        setInterval(
+            () => {
+                this.load(context);
+            },
+            1000 * 60 * 60
+        );
+    }
+    private load(context: vscode.ExtensionContext) {
+        this.data = {};
         this.orders = extensionConfigState.get(context);
         for (const [id, order] of Object.entries(this.orders) as [UUID, number][]) {
             const data = snippetConfigState.get(context, order);
@@ -68,7 +74,6 @@ class LoadedConfigsDataProvider extends ObservableTreeDataProviderTemplate<Snipp
             this.data[id] = new SnippetConfigItem(context, id, data);
         }
         this.refresh();
-        this.loaded = true;
     }
 }
 

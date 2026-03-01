@@ -3,7 +3,7 @@ import { initCommands } from './commands';
 import { updateDataProviderOnCommand } from './services/sidebar';
 import { mountSnippetConfigs, registerBuiltInSnippets } from './services/snippets';
 import { initViews } from './views';
-import { loadLocalData, syncDataCrossDevice } from './services/storage';
+import { syncDataCrossDevice } from './services/storage';
 
 export async function activate(context: vscode.ExtensionContext) {
     initCommands(context);
@@ -12,5 +12,4 @@ export async function activate(context: vscode.ExtensionContext) {
     await mountSnippetConfigs(context);
     registerBuiltInSnippets(context);
     syncDataCrossDevice(context);
-    loadLocalData(context);
 }
