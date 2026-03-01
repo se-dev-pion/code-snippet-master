@@ -33,8 +33,8 @@ class LoadedConfigsDataProvider extends ObservableTreeDataProviderTemplate<Snipp
     override getChildren() {
         return Object.values(this.data);
     }
-    public add(context: vscode.ExtensionContext, item: SnippetConfigItem) {
-        const order = Object.keys(this.data).length;
+    public save(context: vscode.ExtensionContext, item: SnippetConfigItem) {
+        const order = this.data[item.id] ? this.orders[item.id] : Object.keys(this.data).length;
         if (order === maxSnippetConfigCountLimit) {
             vscode.window.showErrorMessage(
                 `Snippet configs can only be up to ${maxSnippetConfigCountLimit} !`

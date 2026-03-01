@@ -5,13 +5,14 @@ import { UnloadConfigCommand } from '../commands/unloadConfig';
 import { loadSnippetConfig } from '../logics/parser';
 import { randomUUID, UUID } from 'crypto';
 import { ForceSyncCommand } from '../commands/forceSync';
+import { ReloadConfigCommand } from '../commands/reloadConfig';
 
 export function updateDataProviderOnCommand(context: vscode.ExtensionContext) {
     LoadConfigCommand.addCallback(async (file: vscode.Uri) => {
         try {
             const data = await loadSnippetConfig(file);
             const item = new SnippetConfigItem(context, randomUUID(), data);
-            loadedConfigsDataProvider.add(context, item);
+            loadedConfigsDataProvider.save(context, item);
         } catch (err) {
             vscode.window.showErrorMessage((err as Error).message);
         }
@@ -21,5 +22,14 @@ export function updateDataProviderOnCommand(context: vscode.ExtensionContext) {
     });
     ForceSyncCommand.addCallback(() => {
         loadedConfigsDataProvider.sync(context);
+    });
+    ReloadConfigCommand.addCallback(async (id: UUID, file: vscode.Uri) => {
+        try {
+            const data = await loadSnippetConfig(file);
+            const item = new SnippetConfigItem(context, id, data);
+            loadedConfigsDataProvider.save(context, item);
+        } catch (err) {
+            vscode.window.showErrorMessage((err as Error).message);
+        }
     });
 }
