@@ -10,14 +10,10 @@ PS: [Felix](https://github.com/FelixHajimi) provides the idea of this product, i
 
 ## Examples
 
-1. Create a snippet config
+1. Create a snippet config.![create_config.gif](https://raw.githubusercontent.com/se-dev-pion/snippet-manager/refs/heads/main/images/create_config.gif)
 
-// TODO
+2. Use a snippet Config.![use_config.gif](https://raw.githubusercontent.com/se-dev-pion/snippet-manager/refs/heads/main/images/use_config.gif)
 
-2. Load a snippet Config to use
+3. Update a snippet config.![update_config.gif](https://raw.githubusercontent.com/se-dev-pion/snippet-manager/refs/heads/main/images/update_config.gif)
 
-// TODO
-
-3. Sync snippet configs created from another device
-
-// TODO
+4. Sync snippet configs from other devices.![sync_data.gif](https://raw.githubusercontent.com/se-dev-pion/snippet-manager/refs/heads/main/images/sync_data.gif)
