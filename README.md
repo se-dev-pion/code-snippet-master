@@ -4,8 +4,20 @@
 
 ## Introduction
 
-Better snippet management instead of the built-in one of vscode.
+Better snippet management instead of the built-in one. This extension is available in [`VSCode`](https://code.visualstudio.com/), [`Cursor`](https://cursor.com/), [`Windsurf`](https://windsurf.com/), [`Trae`](https://www.trae.cn/), [`CodeBuddy`](https://www.codebuddy.cn/ide/) and [`Qoder`](https://caug.cn/).
+
+PS: [Felix](https://github.com/FelixHajimi) provides the idea of this product, including `tree view` and `xml config format`.
 
 ## Examples
+
+1. Create a snippet config
+
+// TODO
+
+2. Load a snippet Config to use
+
+// TODO
+
+3. Sync snippet configs created from another device
 
 // TODO
