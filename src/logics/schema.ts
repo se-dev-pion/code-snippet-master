@@ -1,12 +1,13 @@
 import z from 'zod';
+import { cdataPropName } from '../common/utils';
 
 const snippetConfigItemSchema = z.object({
     prefix: z.string(),
     description: z.string(),
     body: z.object({
         '@_scope': z.string(),
-        '@_placeholder': z.boolean().default(false),
-        '#text': z.string()
+        '@_placeholder': z.boolean().optional(),
+        [cdataPropName]: z.string()
     })
 });
 

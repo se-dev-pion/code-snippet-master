@@ -4,18 +4,24 @@ import { ObservableTreeDataProviderTemplate } from './common/templates';
 import { extensionConfigState, snippetConfigState } from './state';
 import { SnippetConfig } from './schema';
 import { UUID } from 'crypto';
+import { previewSchema } from './preview';
 
 export class SnippetConfigItem extends vscode.TreeItem {
     public constructor(
         _context: vscode.ExtensionContext, // for open and edit config
         public readonly id: UUID,
         public readonly data: SnippetConfig,
-        public readonly label: string = data.root.name
+        public readonly label: string = data.root.name,
+        public readonly resourceUri = vscode.Uri.parse(`${previewSchema}:/${id}.snippet.xml`)
     ) {
         super(label, vscode.TreeItemCollapsibleState.None);
         this.description = id;
         this.contextValue = `${configKey}.config-item`;
-        // TODO implement editing view
+        this.command = {
+            command: 'vscode.open',
+            title: 'Preview',
+            arguments: [resourceUri]
+        };
     }
 }
 

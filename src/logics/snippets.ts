@@ -1,12 +1,13 @@
 import vscode from 'vscode';
 import { SnippetConfigItem } from './schema';
+import { cdataPropName } from '../common/utils';
 
 export function buildCompletionItem(config: SnippetConfigItem, language: string) {
     if (![language, '*'].includes(config.body['@_scope'])) {
         return;
     }
     const snippet = new vscode.CompletionItem(config.prefix, vscode.CompletionItemKind.Snippet);
-    const rawText = config.body['#text'].trimEnd().split('\n');
+    const rawText = config.body[cdataPropName].trimEnd().split('\n');
     while (rawText.length > 0 && !rawText[0]) {
         rawText.shift();
     }
