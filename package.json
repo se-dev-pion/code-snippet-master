@@ -1,11 +1,11 @@
 {
-  "name": "snippet-manager",
-  "displayName": "Snippet Manager",
+  "name": "code-snippet-master",
+  "displayName": "Code Snippet Master",
   "description": "A better experience for snippets management instead of native ones",
   "version": "0.1.0",
   "icon": "./assets/icon.png",
   "publisher": "se-dev-pion",
-  "repository": "https://github.com/se-dev-pion/snippet-manager",
+  "repository": "https://github.com/se-dev-pion/code-snippet-master",
   "engines": {
     "vscode": "^1.100.0"
   },
@@ -19,22 +19,22 @@
   "contributes": {
     "commands": [
       {
-        "command": "snippet-manager.load-config",
+        "command": "code-snippet-master.load-config",
         "title": "Load",
         "icon": "$(add)"
       },
       {
-        "command": "snippet-manager.unload-config",
+        "command": "code-snippet-master.unload-config",
         "title": "Unload",
         "icon": "$(trash)"
       },
       {
-        "command": "snippet-manager.force-sync",
+        "command": "code-snippet-master.force-sync",
         "title": "Force Sync",
         "icon": "$(sync)"
       },
       {
-        "command": "snippet-manager.reload-config",
+        "command": "code-snippet-master.reload-config",
         "title": "Reload",
         "icon": "$(refresh)"
       }
@@ -42,25 +42,25 @@
     "menus": {
       "view/title": [
         {
-          "command": "snippet-manager.load-config",
-          "when": "view == snippet-manager.loaded-configs",
+          "command": "code-snippet-master.load-config",
+          "when": "view == code-snippet-master.loaded-configs",
           "group": "navigation"
         },
         {
-          "command": "snippet-manager.force-sync",
-          "when": "view == snippet-manager.loaded-configs",
+          "command": "code-snippet-master.force-sync",
+          "when": "view == code-snippet-master.loaded-configs",
           "group": "navigation"
         }
       ],
       "view/item/context": [
         {
-          "command": "snippet-manager.unload-config",
-          "when": "view == snippet-manager.loaded-configs",
+          "command": "code-snippet-master.unload-config",
+          "when": "view == code-snippet-master.loaded-configs",
           "group": "inline"
         },
         {
-          "command": "snippet-manager.reload-config",
-          "when": "view == snippet-manager.loaded-configs",
+          "command": "code-snippet-master.reload-config",
+          "when": "view == code-snippet-master.loaded-configs",
           "group": "inline"
         }
       ]
@@ -68,16 +68,16 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "snippet-manager",
-          "title": "Snippet Manager",
+          "id": "code-snippet-master",
+          "title": "Code Snippet Master",
           "icon": "assets/sidebar.png"
         }
       ]
     },
     "views": {
-      "snippet-manager": [
+      "code-snippet-master": [
         {
-          "id": "snippet-manager.loaded-configs",
+          "id": "code-snippet-master.loaded-configs",
           "name": "Loaded Configs",
           "icon": "assets/sidebar.png"
         }
