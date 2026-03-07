@@ -3,6 +3,7 @@ import { mountSnippetConfigs, registerBuiltInSnippets } from './services/snippet
 import { syncDataCrossDevice } from './services/storage';
 import commands from './commands';
 import views from './views';
+import { addHighlightToPlaceholders } from './services/highlight';
 
 export async function activate(context: vscode.ExtensionContext) {
     commands.init(context);
@@ -10,4 +11,5 @@ export async function activate(context: vscode.ExtensionContext) {
     await mountSnippetConfigs(context);
     registerBuiltInSnippets(context);
     syncDataCrossDevice(context);
+    addHighlightToPlaceholders(context);
 }

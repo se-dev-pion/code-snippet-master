@@ -35,3 +35,21 @@ export function buildCompletionItem(config: SnippetConfigItem, language: string)
     snippet.detail = config.description;
     return snippet;
 }
+
+export function extractPlaceholderAreas(document: vscode.TextDocument) {
+    if (document.languageId !== 'snippet') {
+        return [];
+    }
+    const ranges = new Array<vscode.Range>();
+    for (let lineNumber = 0; lineNumber < document.lineCount; lineNumber++) {
+        const line = document.lineAt(lineNumber);
+        const placeholders = line.text.matchAll(placeholderMatch);
+        for (const placeholder of placeholders) {
+            const start = placeholder.index;
+            const end = start + placeholder[0].length;
+            const range = new vscode.Range(lineNumber, start, lineNumber, end);
+            ranges.push(range);
+        }
+    }
+    return ranges;
+}

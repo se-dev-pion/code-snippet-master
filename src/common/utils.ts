@@ -46,3 +46,16 @@ export function serialize<D, S extends Serializer>(data: D, serializer: S) {
 export function configKey(context: vscode.ExtensionContext) {
     return context.extension.id.split('.')[1];
 }
+
+export function debounced<T extends Function>(func: T, wait: number) {
+    let timeout: NodeJS.Timeout | null = null;
+    const f = (...args: any[]): void => {
+        if (timeout !== null) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(() => {
+            func(...args);
+        }, wait);
+    };
+    return f as Function as T;
+}
