@@ -13,8 +13,8 @@ export class UnloadConfigCommand extends CommandTemplate {
     override call(item: SnippetConfigItem) {
         UnloadConfigCommand._callbacks.forEach(f => f(item.id));
     }
-    private static _callbacks = new Array<(id: UUID) => void>();
-    public static addCallback(f: (id: UUID) => void) {
+    private static _callbacks = new Array<(id: UUID) => Promise<boolean>>();
+    public static addCallback(f: (id: UUID) => Promise<boolean>) {
         UnloadConfigCommand._callbacks.push(f);
     }
 }

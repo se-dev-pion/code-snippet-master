@@ -6,7 +6,7 @@ import { loadSnippetConfig } from '../logics/parser';
 import { randomUUID, UUID } from 'crypto';
 import { ForceSyncCommand } from '../commands/forceSync';
 import { ReloadConfigCommand } from '../commands/reloadConfig';
-import { previewSchema, PreviewVirtualFileSystemProvider } from '../logics/preview';
+import { PreviewVirtualFileSystemProvider } from '../logics/preview';
 
 export function updateDataProviderOnCommand(context: vscode.ExtensionContext) {
     LoadConfigCommand.addCallback(async (file: vscode.Uri) => {
@@ -18,8 +18,17 @@ export function updateDataProviderOnCommand(context: vscode.ExtensionContext) {
             vscode.window.showErrorMessage((err as Error).message);
         }
     });
-    UnloadConfigCommand.addCallback((id: UUID) => {
-        loadedConfigsDataProvider.delete(context, id);
+    UnloadConfigCommand.addCallback(async (id: UUID) => {
+        const result = await vscode.window.showWarningMessage(
+            'Confirm to delete it?',
+            { modal: true },
+            'OK'
+        );
+        const ok = result === 'OK';
+        if (ok) {
+            loadedConfigsDataProvider.delete(context, id);
+        }
+        return ok;
     });
     ForceSyncCommand.addCallback(() => {
         loadedConfigsDataProvider.sync(context);
