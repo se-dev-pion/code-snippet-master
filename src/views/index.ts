@@ -1,6 +1,8 @@
-import { loadedConfigsDataProvider } from '../logics/config';
-import { LoadedConfigsTreeView } from './loadedConfigs';
+import vscode from 'vscode';
+import loadedConfigs from './loadedConfigs';
 
-export function initViews() {
-    LoadedConfigsTreeView.instance.register(loadedConfigsDataProvider);
-}
+export default {
+    init(context: vscode.ExtensionContext) {
+        [loadedConfigs].forEach(view => view.register(context));
+    }
+};

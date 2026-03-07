@@ -1,14 +1,16 @@
 import vscode from 'vscode';
-import { TreeView } from './interfaces';
-import { configKey } from '../../common/constants';
+import { configKey } from '../../common/utils';
+import { ViewID } from '../../common/enums';
 
-export abstract class TreeViewTemplate<T> implements TreeView<vscode.TreeDataProvider<T>> {
-    protected constructor() {}
-    public register(provider: vscode.TreeDataProvider<T>) {
-        vscode.window.registerTreeDataProvider(this.fullID, provider);
+export class TreeView {
+    public constructor(
+        private readonly context: vscode.ExtensionContext,
+        private readonly id: ViewID,
+        private readonly provider: vscode.TreeDataProvider<any>
+    ) {
+        vscode.window.registerTreeDataProvider(this.fullID, this.provider);
     }
     private get fullID() {
-        return `${configKey}.${this.id}`;
+        return `${configKey(this.context)}.${this.id}`;
     }
-    protected abstract id: string;
 }

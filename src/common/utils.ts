@@ -1,3 +1,4 @@
+import vscode from 'vscode';
 import { XMLBuilder, XMLParser } from 'fast-xml-parser';
 import { ZodType } from 'zod';
 
@@ -40,4 +41,8 @@ interface Serializer {
 
 export function serialize<D, S extends Serializer>(data: D, serializer: S) {
     return serializer.build(data);
+}
+
+export function configKey(context: vscode.ExtensionContext) {
+    return context.extension.id.split('.')[1];
 }

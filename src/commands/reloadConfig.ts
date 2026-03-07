@@ -1,34 +1,39 @@
 import vscode from 'vscode';
 import { CommandID } from '../common/enums';
-import { Command } from './common/interfaces';
-import { CommandTemplate } from './common/templates';
-import { SnippetConfigItem } from '../logics/config';
-import { UUID } from 'crypto';
+import { Command } from './common/templates';
+import { loadedConfigsDataProvider, SnippetConfigItem } from '../logics/config';
+import { loadSnippetConfig } from '../logics/parser';
+import { PreviewVirtualFileSystemProvider } from '../logics/preview';
 
-export class ReloadConfigCommand extends CommandTemplate {
-    private static _command = new ReloadConfigCommand();
-    public static get instance(): Command {
-        return ReloadConfigCommand._command;
+export default {
+    register(context: vscode.ExtensionContext) {
+        const previewProvider = new PreviewVirtualFileSystemProvider(context);
+        previewProvider.register(context);
+        return new Command(context, CommandID.ReloadConfig, async (item: SnippetConfigItem) => {
+            const file = (
+                await vscode.window.showOpenDialog({
+                    title: 'Choose a snippet config file',
+                    canSelectFiles: true,
+                    canSelectFolders: false,
+                    canSelectMany: false,
+                    filters: {
+                        'Snippet Configs': ['snippet.xml']
+                    }
+                })
+            )?.at(0);
+            if (!file) {
+                return;
+            }
+            try {
+                const data = await loadSnippetConfig(file);
+                loadedConfigsDataProvider.save(
+                    context,
+                    new SnippetConfigItem(context, item.id, data)
+                );
+                previewProvider.refresh(item.resourceUri);
+            } catch (err) {
+                vscode.window.showErrorMessage((err as Error).message);
+            }
+        });
     }
-    override id = CommandID.ReloadConfig;
-    override async call(item: SnippetConfigItem) {
-        const file = (
-            await vscode.window.showOpenDialog({
-                title: 'Choose a snippet config file',
-                canSelectFiles: true,
-                canSelectFolders: false,
-                canSelectMany: false,
-                filters: {
-                    'Snippet Configs': ['snippet.xml']
-                }
-            })
-        )?.at(0);
-        if (file) {
-            await Promise.all(ReloadConfigCommand._callbacks.map(f => f(item.id, file)));
-        }
-    }
-    public static _callbacks = new Array<(id: UUID, file: vscode.Uri) => Promise<void>>();
-    public static addCallback(f: (id: UUID, file: vscode.Uri) => Promise<void>) {
-        ReloadConfigCommand._callbacks.push(f);
-    }
-}
+};

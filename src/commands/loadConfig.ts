@@ -1,32 +1,34 @@
 import vscode from 'vscode';
 import { CommandID } from '../common/enums';
-import { Command } from './common/interfaces';
-import { CommandTemplate } from './common/templates';
+import { Command } from './common/templates';
+import { loadSnippetConfig } from '../logics/parser';
+import { loadedConfigsDataProvider, SnippetConfigItem } from '../logics/config';
+import { randomUUID } from 'crypto';
 
-export class LoadConfigCommand extends CommandTemplate {
-    private static _command = new LoadConfigCommand();
-    public static get instance(): Command {
-        return LoadConfigCommand._command;
+export default {
+    register(context: vscode.ExtensionContext) {
+        return new Command(context, CommandID.LoadConfig, async () => {
+            const file = (
+                await vscode.window.showOpenDialog({
+                    title: 'Choose a snippet config file',
+                    canSelectFiles: true,
+                    canSelectFolders: false,
+                    canSelectMany: false,
+                    filters: {
+                        'Snippet Configs': ['snippet.xml']
+                    }
+                })
+            )?.at(0);
+            if (!file) {
+                return;
+            }
+            try {
+                const data = await loadSnippetConfig(file);
+                const item = new SnippetConfigItem(context, randomUUID(), data);
+                loadedConfigsDataProvider.save(context, item);
+            } catch (err) {
+                vscode.window.showErrorMessage((err as Error).message);
+            }
+        });
     }
-    override id = CommandID.LoadConfig;
-    override async call() {
-        const file = (
-            await vscode.window.showOpenDialog({
-                title: 'Choose a snippet config file',
-                canSelectFiles: true,
-                canSelectFolders: false,
-                canSelectMany: false,
-                filters: {
-                    'Snippet Configs': ['snippet.xml']
-                }
-            })
-        )?.at(0);
-        if (file) {
-            await Promise.all(LoadConfigCommand._callbacks.map(f => f(file)));
-        }
-    }
-    public static _callbacks = new Array<(file: vscode.Uri) => Promise<void>>();
-    public static addCallback(f: (file: vscode.Uri) => Promise<void>) {
-        LoadConfigCommand._callbacks.push(f);
-    }
-}
+};

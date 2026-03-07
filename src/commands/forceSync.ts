@@ -1,19 +1,12 @@
+import vscode from 'vscode';
 import { CommandID } from '../common/enums';
-import { Command } from './common/interfaces';
-import { CommandTemplate } from './common/templates';
+import { Command } from './common/templates';
+import { loadedConfigsDataProvider } from '../logics/config';
 
-export class ForceSyncCommand extends CommandTemplate {
-    private static _command = new ForceSyncCommand();
-    public static get instance(): Command {
-        return ForceSyncCommand._command;
+export default {
+    register(context: vscode.ExtensionContext) {
+        return new Command(context, CommandID.ForceSync, () => {
+            loadedConfigsDataProvider.sync(context);
+        });
     }
-    override id = CommandID.ForceSync;
-    override async call() {
-        ForceSyncCommand._callbacks.forEach(f => f());
-    }
-    public static _callbacks = new Array<() => void>();
-
-    public static addCallback(f: () => void) {
-        ForceSyncCommand._callbacks.push(f);
-    }
-}
+};

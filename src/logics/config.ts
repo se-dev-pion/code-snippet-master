@@ -1,14 +1,15 @@
 import vscode from 'vscode';
-import { configKey, maxSnippetConfigCountLimit } from '../common/constants';
+import { maxSnippetConfigCountLimit } from '../common/constants';
 import { ObservableTreeDataProviderTemplate } from './common/templates';
 import { extensionConfigState, snippetConfigState } from './state';
 import { SnippetConfig } from './schema';
 import { UUID } from 'crypto';
 import { previewSchema } from './preview';
+import { configKey } from '../common/utils';
 
 export class SnippetConfigItem extends vscode.TreeItem {
     public constructor(
-        _context: vscode.ExtensionContext, // for open and edit config
+        context: vscode.ExtensionContext, // for open and edit config
         public readonly id: UUID,
         public readonly data: SnippetConfig,
         public readonly label: string = data.root.name,
@@ -16,7 +17,7 @@ export class SnippetConfigItem extends vscode.TreeItem {
     ) {
         super(label, vscode.TreeItemCollapsibleState.None);
         this.description = id;
-        this.contextValue = `${configKey}.config-item`;
+        this.contextValue = `${configKey(context)}.config-item`;
         this.command = {
             command: 'vscode.open',
             title: 'Preview',

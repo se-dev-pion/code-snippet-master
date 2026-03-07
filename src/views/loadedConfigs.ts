@@ -1,11 +1,10 @@
-import { TreeViewTemplate } from './common/templates';
+import vscode from 'vscode';
+import { TreeView } from './common/templates';
 import { ViewID } from '../common/enums';
-import { SnippetConfigItem } from '../logics/config';
+import { loadedConfigsDataProvider } from '../logics/config';
 
-export class LoadedConfigsTreeView extends TreeViewTemplate<SnippetConfigItem> {
-    private static _view = new LoadedConfigsTreeView();
-    public static get instance() {
-        return LoadedConfigsTreeView._view;
+export default {
+    register(context: vscode.ExtensionContext) {
+        return new TreeView(context, ViewID.LoadedConfigs, loadedConfigsDataProvider);
     }
-    override id = ViewID.LoadedConfigs;
-}
+};

@@ -1,12 +1,11 @@
 import vscode from 'vscode';
-import { LoadConfigCommand } from './loadConfig';
-import { UnloadConfigCommand } from './unloadConfig';
-import { ForceSyncCommand } from './forceSync';
-import { ReloadConfigCommand } from './reloadConfig';
+import forceSync from './forceSync';
+import loadConfig from './loadConfig';
+import unloadConfig from './unloadConfig';
+import reloadConfig from './reloadConfig';
 
-export function initCommands(context: vscode.ExtensionContext) {
-    LoadConfigCommand.instance.register(context);
-    UnloadConfigCommand.instance.register(context);
-    ForceSyncCommand.instance.register(context);
-    ReloadConfigCommand.instance.register(context);
-}
+export default {
+    init(context: vscode.ExtensionContext) {
+        [loadConfig, unloadConfig, forceSync, reloadConfig].forEach(cmd => cmd.register(context));
+    }
+};
