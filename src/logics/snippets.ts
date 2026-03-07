@@ -2,6 +2,8 @@ import vscode from 'vscode';
 import { SnippetConfigItem } from './schema';
 import { cdataPropName } from '../common/utils';
 
+const placeholderMatch = /\/\*(\$.*?)\*\//g;
+
 export function buildCompletionItem(config: SnippetConfigItem, language: string) {
     if (![language, '*'].includes(config.body['@_scope'])) {
         return;
@@ -23,7 +25,13 @@ export function buildCompletionItem(config: SnippetConfigItem, language: string)
             return a.length >= b.length ? a : b;
         })
         .join('\n');
-    snippet.insertText = config.body['@_placeholder'] ? new vscode.SnippetString(text) : text;
+    snippet.insertText = new vscode.SnippetString(
+        config.body['@_placeholder']
+            ? text
+            : text
+                  .replaceAll(/(?<!\/\*)\$\{.*?\}(?!\*\/)/g, '\\$&')
+                  .replaceAll(placeholderMatch, '$1')
+    );
     snippet.detail = config.description;
     return snippet;
 }
