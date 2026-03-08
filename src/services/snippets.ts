@@ -88,6 +88,12 @@ const builtInSnippets = [
         insertText: snippetConfigFileTemplate,
         detail: 'Init the snippet config file',
         kind: vscode.CompletionItemKind.File
+    },
+    {
+        label: 'placeholder',
+        insertText: '/*\$$1*/',
+        detail: 'Insert a TextMate placeholder wrapped with "/* */"',
+        kind: vscode.CompletionItemKind.Variable
     }
 ];
 
