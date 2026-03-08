@@ -28,9 +28,7 @@ export function buildCompletionItem(config: SnippetConfigItem, language: string)
     snippet.insertText = new vscode.SnippetString(
         config.body['@_placeholder']
             ? text
-            : text
-                  .replaceAll(/(?<!\/\*)\$\{.*?\}(?!\*\/)/g, '\\$&')
-                  .replaceAll(placeholderMatch, '$1')
+            : text.replaceAll(/(?<!\/\*)\$.*?(?!\*\/)/g, '\\$&').replaceAll(placeholderMatch, '$1')
     );
     snippet.detail = config.description;
     return snippet;
