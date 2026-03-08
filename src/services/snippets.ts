@@ -59,6 +59,7 @@ enum PlaceHolders {
     Scope = '${2:<!-- languageId -->}',
     Description = '${3:<!-- description -->}',
     Body = '${4:<!-- snippet content -->}',
+    Patterns = '${5:<!-- "include" or "exclude" patterns for providing auto completion -->}',
     Name = '${1:<!-- config name -->}',
     Items = '${2:<!-- snippet items -->}'
 }
@@ -69,12 +70,15 @@ const snippetConfigItemSnippet = /*xml*/ `<item>
   <body scope="${PlaceHolders.Scope}"><![CDATA[
     ${PlaceHolders.Body}
   ]]></body>
+  ${PlaceHolders.Patterns}
 </item>`;
 
 const snippetConfigFileTemplate = /*xml*/ `<root>
   <name>${PlaceHolders.Name}</name>
   ${PlaceHolders.Items}
 </root>`;
+
+const excludeConfigSnippet = /*xml*/ `<exclude>$1</exclude>`;
 
 const builtInSnippets = [
     {
@@ -94,6 +98,18 @@ const builtInSnippets = [
         insertText: '/*\$$1*/',
         detail: 'Insert a TextMate placeholder wrapped with "/* */"',
         kind: vscode.CompletionItemKind.Variable
+    },
+    {
+        label: 'exclude',
+        insertText: /*xml*/ `<exclude>$1</exclude>`,
+        detail: 'Insert a pattern excluded for auto completion',
+        kind: vscode.CompletionItemKind.Snippet
+    },
+    {
+        label: 'include',
+        insertText: /*xml*/ `<include>$1</include>`,
+        detail: 'Insert a pattern included for auto completion',
+        kind: vscode.CompletionItemKind.Snippet
     }
 ];
 
