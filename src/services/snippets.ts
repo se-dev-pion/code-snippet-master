@@ -2,6 +2,14 @@ import vscode from 'vscode';
 import { loadedConfigsDataProvider } from '../logics/config';
 import { buildCompletionItem } from '../logics/snippets';
 
+function buildGlobPattern(pattern: string): vscode.DocumentFilter {
+    const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
+    if (workspaceFolder) {
+        pattern = vscode.Uri.joinPath(workspaceFolder.uri, pattern).fsPath;
+    }
+    return { pattern };
+}
+
 export async function mountSnippetConfigs(context: vscode.ExtensionContext) {
     const provider: vscode.CompletionItemProvider = {
         async provideCompletionItems(document, _position, _token, _context) {
@@ -11,6 +19,20 @@ export async function mountSnippetConfigs(context: vscode.ExtensionContext) {
                     const rawItem = item.data?.root.item ?? [];
                     const items = rawItem instanceof Array ? rawItem : [rawItem];
                     for (const config of items) {
+                        if (
+                            (config.exclude &&
+                                vscode.languages.match(
+                                    [config.exclude].flat().map(buildGlobPattern),
+                                    document
+                                )) ||
+                            (config.include &&
+                                !vscode.languages.match(
+                                    [config.include].flat().map(buildGlobPattern),
+                                    document
+                                ))
+                        ) {
+                            continue;
+                        }
                         const snippet = buildCompletionItem(config, document.languageId);
                         if (snippet) {
                             snippets.push(snippet);
@@ -28,10 +50,8 @@ export async function mountSnippetConfigs(context: vscode.ExtensionContext) {
         scheme: 'file',
         language
     }));
-    const disposables = selectors.map(selector =>
-        vscode.languages.registerCompletionItemProvider(selector, provider)
-    );
-    context.subscriptions.push(...disposables);
+    const disposable = vscode.languages.registerCompletionItemProvider(selectors, provider);
+    context.subscriptions.push(disposable);
 }
 
 enum PlaceHolders {

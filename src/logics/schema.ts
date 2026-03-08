@@ -8,7 +8,9 @@ const snippetConfigItemSchema = z.object({
         '@_scope': z.string(),
         '@_placeholder': z.boolean().optional(),
         [cdataPropName]: z.string()
-    })
+    }),
+    include: z.union([z.string(), z.array(z.string())]).optional(),
+    exclude: z.union([z.string(), z.array(z.string())]).optional()
 });
 
 export type SnippetConfigItem = z.infer<typeof snippetConfigItemSchema>;
