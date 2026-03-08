@@ -22,17 +22,27 @@ export default {
                 })
             )?.at(0);
             if (!file) {
-                return;
+                return false;
             }
             try {
                 const data = await loadSnippetConfig(file);
-                loadedConfigsDataProvider.save(
-                    context,
-                    new SnippetConfigItem(context, item.id, data)
+                const result = await vscode.window.showWarningMessage(
+                    'Attention: This will overwrite the current config',
+                    { modal: true },
+                    'OK'
                 );
-                previewProvider.refresh(item.resourceUri);
+                const ok = result === 'OK';
+                if (ok) {
+                    loadedConfigsDataProvider.save(
+                        context,
+                        new SnippetConfigItem(context, item.id, data)
+                    );
+                    previewProvider.refresh(item.resourceUri);
+                }
+                return ok;
             } catch (err) {
                 vscode.window.showErrorMessage((err as Error).message);
+                return false;
             }
         });
     }
