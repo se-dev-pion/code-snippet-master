@@ -22,13 +22,9 @@ export default {
             if (!file) {
                 return;
             }
-            try {
-                const data = await loadSnippetConfig(file);
-                const item = new SnippetConfigItem(context, randomUUID(), data);
-                loadedConfigsDataProvider.save(context, item);
-            } catch (err) {
-                vscode.window.showErrorMessage((err as Error).message);
-            }
+            const data = await loadSnippetConfig(file);
+            const item = new SnippetConfigItem(context, randomUUID(), data);
+            loadedConfigsDataProvider.save(context, item);
         });
     }
 };

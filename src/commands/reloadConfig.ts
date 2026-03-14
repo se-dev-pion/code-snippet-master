@@ -24,26 +24,21 @@ export default {
             if (!file) {
                 return false;
             }
-            try {
-                const data = await loadSnippetConfig(file);
-                const result = await vscode.window.showWarningMessage(
-                    'Attention: This will overwrite the current config',
-                    { modal: true },
-                    'OK'
+            const data = await loadSnippetConfig(file);
+            const result = await vscode.window.showWarningMessage(
+                'Attention: This will overwrite the current config',
+                { modal: true },
+                'OK'
+            );
+            const ok = result === 'OK';
+            if (ok) {
+                loadedConfigsDataProvider.save(
+                    context,
+                    new SnippetConfigItem(context, item.id, data)
                 );
-                const ok = result === 'OK';
-                if (ok) {
-                    loadedConfigsDataProvider.save(
-                        context,
-                        new SnippetConfigItem(context, item.id, data)
-                    );
-                    previewProvider.refresh(item.resourceUri);
-                }
-                return ok;
-            } catch (err) {
-                vscode.window.showErrorMessage((err as Error).message);
-                return false;
+                previewProvider.refresh(item.resourceUri);
             }
+            return ok;
         });
     }
 };

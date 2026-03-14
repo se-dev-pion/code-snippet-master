@@ -1,6 +1,7 @@
 import vscode from 'vscode';
-import { loadedConfigsDataProvider } from '../logics/config';
+import { loadedConfigsDataProvider, SnippetConfigItem } from '../logics/config';
 import { buildCompletionItem } from '../logics/snippets';
+import { Result } from 'neverthrow';
 
 function buildGlobPattern(pattern: string): vscode.DocumentFilter {
     const workspaceFolder = vscode.workspace.workspaceFolders?.[0];
@@ -14,34 +15,39 @@ export async function mountSnippetConfigs(context: vscode.ExtensionContext) {
     const provider: vscode.CompletionItemProvider = {
         async provideCompletionItems(document, _position, _token, _context) {
             const snippets = new Array<vscode.CompletionItem>();
-            for (const item of loadedConfigsDataProvider.getChildren()) {
-                try {
-                    const rawItem = item.data?.root.item ?? [];
-                    const items = rawItem instanceof Array ? rawItem : [rawItem];
-                    for (const config of items) {
-                        if (
-                            (config.exclude &&
-                                vscode.languages.match(
-                                    [config.exclude].flat().map(buildGlobPattern),
-                                    document
-                                )) ||
-                            (config.include &&
-                                !vscode.languages.match(
-                                    [config.include].flat().map(buildGlobPattern),
-                                    document
-                                ))
-                        ) {
-                            continue;
-                        }
-                        const snippet = buildCompletionItem(config, document.languageId);
-                        if (snippet) {
-                            snippets.push(snippet);
-                        }
+            const f = (item: SnippetConfigItem) => {
+                const rawItem = item.data?.root.item ?? [];
+                const items = rawItem instanceof Array ? rawItem : [rawItem];
+                const snippets = new Array<vscode.CompletionItem>();
+                for (const config of items) {
+                    if (
+                        (config.exclude &&
+                            vscode.languages.match(
+                                [config.exclude].flat().map(buildGlobPattern),
+                                document
+                            )) ||
+                        (config.include &&
+                            !vscode.languages.match(
+                                [config.include].flat().map(buildGlobPattern),
+                                document
+                            ))
+                    ) {
+                        continue;
                     }
-                } catch (err) {
-                    console.log((err as Error).message);
+                    const snippet = buildCompletionItem(config, document.languageId);
+                    if (snippet) {
+                        snippets.push(snippet);
+                    }
                 }
-            }
+                return snippets;
+            };
+            loadedConfigsDataProvider.getChildren().forEach(item => {
+                const result = Result.fromThrowable(f, e => e as Error)(item);
+                result.match(
+                    arr => snippets.push(...arr),
+                    err => console.log(err.message)
+                );
+            });
             return snippets;
         }
     };
