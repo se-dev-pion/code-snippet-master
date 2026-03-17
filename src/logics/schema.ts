@@ -8,7 +8,6 @@ const snippetConfigItemSchema = z.object({
     description: z.string(),
     body: z.object({
         '@_scope': z.string(),
-        '@_placeholder': z.boolean().optional(),
         [cdataPropName]: z.string()
     }),
     include: z.union([patternSchema, z.array(patternSchema)]).optional(),

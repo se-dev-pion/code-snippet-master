@@ -36,14 +36,6 @@ export class PreviewVirtualFileSystemProvider extends ReadonlyFileSystemProvider
         const id = this.getId(uri);
         const order = extensionConfigState.get(this.context)[id];
         const data = snippetConfigState.get(this.context, order)!;
-        if (data.root.item) {
-            const items = data.root.item instanceof Array ? data.root.item : [data.root.item];
-            items.forEach(item => {
-                if (!item.body['@_placeholder']) {
-                    delete item.body['@_placeholder'];
-                }
-            });
-        }
         const content = serialize(data, xmlBuilder)
             .replaceAll(/(<[a-zA-Z][^>]*>)\s*(<!\[CDATA\[)/g, '$1$2')
             .replaceAll(/(\]\]>)\s*(<\/[a-zA-Z][^>]*>)/g, '$1$2');

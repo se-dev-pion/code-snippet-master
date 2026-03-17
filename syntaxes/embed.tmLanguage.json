@@ -1849,55 +1849,6 @@
           "include": "source.dockerfile"
         }
       ]
-    },
-    {
-      "begin": "<(body) (scope)=(\")([a-z]+|\\*)(\") (placeholder)=\"(true)\">(<!\\[CDATA\\[)",
-      "end": "(\\]\\]>)</(body)>",
-      "name": "meta.embedded.block.snippets",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.tag.xml"
-        },
-        "1": {
-          "name": "entity.name.tag.localname.xml"
-        },
-        "2": {
-          "name": "entity.other.attribute-name.localname.xml"
-        },
-        "3": {
-          "name": "string.quoted"
-        },
-        "5": {
-          "name": "string.quoted"
-        },
-        "6": {
-          "name": "entity.other.attribute-name.localname.xml"
-        },
-        "7": {
-          "name": "constant.language.boolean.true.ts"
-        },
-        "8": {
-          "name": "comment.block.xml"
-        }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "meta.tag.xml"
-        },
-        "1": {
-          "name": "comment.block.xml"
-        },
-        "2": {
-          "name": "entity.name.tag.localname.xml"
-        }
-      },
-      "contentName": "string.unquoted.cdata.xml",
-      "patterns": [
-        {
-          "match": "(?<!\\$)\\$(?:\\d+|\\{(?:[^{}]|\\{(?:[^{}]|\\{[^{}]*\\})*\\})*\\})",
-          "name": "keyword.operator.insertion.json.comments.snippets"
-        }
-      ]
     }
   ]
 }

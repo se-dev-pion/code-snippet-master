@@ -6,7 +6,7 @@ import { Result } from 'neverthrow';
 export class Command {
     public constructor(
         private readonly context: vscode.ExtensionContext,
-        private readonly id: CommandID,
+        public readonly id: CommandID,
         callback: (...args: any[]) => any
     ) {
         const disposable = vscode.commands.registerCommand(this.fullID, (...args: any[]) => {
