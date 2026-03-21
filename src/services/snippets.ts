@@ -61,16 +61,18 @@ export async function mountSnippetConfigs(context: vscode.ExtensionContext) {
 }
 
 enum PlaceHolders {
-    Prefix = '${1:<!-- prefix for auto completion -->}',
-    Scope = '${2:<!-- languageId -->}',
-    Description = '${3:<!-- description -->}',
-    Body = '${4:<!-- snippet content -->}',
-    Patterns = '${5:<!-- "include" or "exclude" patterns for providing auto completion -->}',
+    Title = '${1:<!-- title for auto completion -->}',
+    Prefix = '${2:<!-- prefix for auto completion -->}',
+    Scope = '${3:<!-- languageId -->}',
+    Description = '${4:<!-- description -->}',
+    Body = '${5:<!-- snippet content -->}',
+    Patterns = '${6:<!-- "include" or "exclude" patterns for providing auto completion -->}',
     Name = '${1:<!-- config name -->}',
     Items = '${2:<!-- snippet items -->}'
 }
 
 const snippetConfigItemSnippet = /*xml*/ `<item>
+  <title>${PlaceHolders.Title}</title>
   <prefix>${PlaceHolders.Prefix}</prefix>
   <description>${PlaceHolders.Description}</description>
   <body scope="${PlaceHolders.Scope}"><![CDATA[
@@ -83,8 +85,6 @@ const snippetConfigFileTemplate = /*xml*/ `<root>
   <name>${PlaceHolders.Name}</name>
   ${PlaceHolders.Items}
 </root>`;
-
-const excludeConfigSnippet = /*xml*/ `<exclude>$1</exclude>`;
 
 const builtInSnippets = [
     {
