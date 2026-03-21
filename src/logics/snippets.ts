@@ -8,7 +8,11 @@ export function buildCompletionItem(config: SnippetConfigItem, language: string)
     if (![language, '*'].includes(config.body['@_scope'])) {
         return;
     }
-    const snippet = new vscode.CompletionItem(config.prefix, vscode.CompletionItemKind.Snippet);
+    const label: vscode.CompletionItemLabel = {
+        label: config.prefix,
+        description: config.title
+    };
+    const snippet = new vscode.CompletionItem(label, vscode.CompletionItemKind.Snippet);
     const rawText = config.body[cdataPropName].trimEnd().split('\n');
     while (rawText.length > 0 && !rawText[0]) {
         rawText.shift();
@@ -29,7 +33,9 @@ export function buildCompletionItem(config: SnippetConfigItem, language: string)
         text.replaceAll(/(?<!\/\*)\$.*?(?!\*\/)/g, '\\$&').replaceAll(placeholderMatch, '$1')
     );
     snippet.detail = config.description;
-    // TODO
+    const doc = new vscode.MarkdownString();
+    doc.appendCodeblock(text, language);
+    snippet.documentation = doc;
     return snippet;
 }
 
