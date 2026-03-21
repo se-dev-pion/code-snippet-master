@@ -1,6 +1,7 @@
 <root>
   <name>demo</name>
   <item>
+    <title>C Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for C</description>
     <body scope="c"><![CDATA[
@@ -13,6 +14,7 @@
     ]]></body>
   </item>
   <item>
+    <title>C++ Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for C++</description>
     <body scope="cpp"><![CDATA[
@@ -25,6 +27,7 @@
     ]]></body>
   </item>
   <item>
+    <title>C# Main Class</title>
     <prefix>demo</prefix>
     <description>main class template for C#</description>
     <body scope="csharp"><![CDATA[
@@ -38,6 +41,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Java Main Class</title>
     <prefix>demo</prefix>
     <description>main class template for Java</description>
     <body scope="java"><![CDATA[
@@ -49,6 +53,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Kotlin Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for Kotlin</description>
     <body scope="kotlin"><![CDATA[
@@ -58,6 +63,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Dart Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for Dart</description>
     <body scope="dart"><![CDATA[
@@ -67,6 +73,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Swift Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for Swift</description>
     <body scope="swift"><![CDATA[
@@ -74,6 +81,7 @@
     ]]></body>
   </item>
   <item>
+    <title>JavaScript Console Log</title>
     <prefix>demo</prefix>
     <description>console log template for JavaScript</description>
     <body scope="javascript"><![CDATA[
@@ -81,6 +89,7 @@
     ]]></body>
   </item>
   <item>
+    <title>TypeScript Console Log</title>
     <prefix>demo</prefix>
     <description>console log template for TypeScript</description>
     <body scope="typescript"><![CDATA[
@@ -88,6 +97,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Vue Component</title>
     <prefix>demo</prefix>
     <description>Vue component template</description>
     <body scope="vue"><![CDATA[
@@ -103,6 +113,7 @@
     ]]></body>
   </item>
   <item>
+    <title>React Component</title>
     <prefix>demo</prefix>
     <description>React component template</description>
     <body scope="javascriptreact"><![CDATA[
@@ -114,6 +125,7 @@
     ]]></body>
   </item>
   <item>
+    <title>React TS Component</title>
     <prefix>demo</prefix>
     <description>React component template with TypeScript</description>
     <body scope="typescriptreact"><![CDATA[
@@ -125,6 +137,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Go Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for Go</description>
     <body scope="go"><![CDATA[
@@ -138,6 +151,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Python Hello World</title>
     <prefix>demo</prefix>
     <description>hello world for Python</description>
     <body scope="python"><![CDATA[
@@ -145,6 +159,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Ruby Hello World</title>
     <prefix>demo</prefix>
     <description>hello world for Ruby</description>
     <body scope="ruby"><![CDATA[
@@ -152,6 +167,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Shell Echo Command</title>
     <prefix>demo</prefix>
     <description>echo command for Shell</description>
     <body scope="shellscript"><![CDATA[
@@ -161,6 +177,7 @@
     ]]></body>
   </item>
   <item>
+    <title>PHP Echo Statement</title>
     <prefix>demo</prefix>
     <description>echo statement for PHP</description>
     <body scope="php"><![CDATA[
@@ -168,6 +185,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Perl Print Statement</title>
     <prefix>demo</prefix>
     <description>print statement for Perl</description>
     <body scope="perl"><![CDATA[
@@ -176,6 +194,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Rust Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for Rust</description>
     <body scope="rust"><![CDATA[
@@ -185,6 +204,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Lua Print Statement</title>
     <prefix>demo</prefix>
     <description>print statement for Lua</description>
     <body scope="lua"><![CDATA[
@@ -192,6 +212,7 @@
     ]]></body>
   </item>
   <item>
+    <title>SQL SELECT Statement</title>
     <prefix>demo</prefix>
     <description>SELECT statement for SQL</description>
     <body scope="sql"><![CDATA[
@@ -199,6 +220,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Odin Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for Odin</description>
     <body scope="odin"><![CDATA[
@@ -212,6 +234,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Zig Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for Zig</description>
     <body scope="zig"><![CDATA[
@@ -223,6 +246,7 @@
     ]]></body>
   </item>
   <item>
+    <title>D Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for D</description>
     <body scope="d"><![CDATA[
@@ -234,6 +258,7 @@
     ]]></body>
   </item>
   <item>
+    <title>V Main Function</title>
     <prefix>demo</prefix>
     <description>main function template for V</description>
     <body scope="v"><![CDATA[
@@ -245,6 +270,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Scala Main Object</title>
     <prefix>demo</prefix>
     <description>main object template for Scala</description>
     <body scope="scala"><![CDATA[
@@ -256,6 +282,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Groovy Print Statement</title>
     <prefix>demo</prefix>
     <description>println statement for Groovy</description>
     <body scope="groovy"><![CDATA[
@@ -263,6 +290,7 @@
     ]]></body>
   </item>
   <item>
+    <title>F# Print Names</title>
     <prefix>demo</prefix>
     <description>print names for F#</description>
     <body scope="fsharp"><![CDATA[
@@ -277,6 +305,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Nim Echo Statement</title>
     <prefix>demo</prefix>
     <description>echo statement for Nim</description>
     <body scope="nim"><![CDATA[
@@ -284,6 +313,7 @@
     ]]></body>
   </item>
   <item>
+    <title>SCSS Class Selector</title>
     <prefix>demo</prefix>
     <description>class selector for SCSS</description>
     <body scope="scss"><![CDATA[
@@ -294,6 +324,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Sass Class Selector</title>
     <prefix>demo</prefix>
     <description>class selector for Sass</description>
     <body scope="sass"><![CDATA[
@@ -303,6 +334,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Less Class Selector</title>
     <prefix>demo</prefix>
     <description>class selector for Less</description>
     <body scope="less"><![CDATA[
@@ -313,6 +345,7 @@
     ]]></body>
   </item>
   <item>
+    <title>JSON Object Example</title>
     <prefix>demo</prefix>
     <description>object example for JSON</description>
     <body scope="json"><![CDATA[
@@ -323,6 +356,7 @@
     ]]></body>
   </item>
   <item>
+    <title>YAML Object Example</title>
     <prefix>demo</prefix>
     <description>object example for YAML</description>
     <body scope="yaml"><![CDATA[
@@ -331,6 +365,7 @@
     ]]></body>
   </item>
   <item>
+    <title>TOML Key-Value Example</title>
     <prefix>demo</prefix>
     <description>key-value example for TOML</description>
     <body scope="toml"><![CDATA[
@@ -339,6 +374,7 @@
     ]]></body>
   </item>
   <item>
+    <title>XML Root Element</title>
     <prefix>demo</prefix>
     <description>root element for XML</description>
     <body scope="xml"><![CDATA[
@@ -348,6 +384,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Protobuf Message Definition</title>
     <prefix>demo</prefix>
     <description>message definition for Protobuf</description>
     <body scope="protobuf"><![CDATA[
@@ -360,6 +397,7 @@
     ]]></body>
   </item>
   <item>
+    <title>GraphQL Query Example</title>
     <prefix>demo</prefix>
     <description>query example for GraphQL</description>
     <body scope="graphql"><![CDATA[
@@ -372,6 +410,7 @@
     ]]></body>
   </item>
   <item>
+    <title>goctl API Service</title>
     <prefix>demo</prefix>
     <description>API service example for goctl</description>
     <body scope="goctl"><![CDATA[
@@ -390,6 +429,7 @@
     ]]></body>
   </item>
   <item>
+    <title>HTML Document Template</title>
     <prefix>demo</prefix>
     <description>HTML document template</description>
     <body scope="html"><![CDATA[
@@ -406,6 +446,7 @@
     ]]></body>
   </item>
   <item>
+    <title>Dockerfile Template</title>
     <prefix>demo</prefix>
     <description>Dockerfile template</description>
     <body scope="dockerfile"><![CDATA[
@@ -417,6 +458,7 @@
     ]]></body>
   </item>
   <item>
+    <title>CSS Class Selector</title>
     <prefix>demo</prefix>
     <description>class selector for CSS</description>
     <body scope="css"><![CDATA[
@@ -424,21 +466,6 @@
         display: flex;
         justify-content: center;
     }
-    ]]></body>
-  </item>
-  <item>
-    <prefix>placeholder-test</prefix>
-    <description>Test TextMate placeholder syntax highlighting</description>
-    <body scope="*" placeholder="true"><![CDATA[
-    Simple tabstops: $1 $2 $0
-    Braced tabstops: ${1} ${2} ${0}
-    With default values: ${1:default} ${2:text here} ${3:sample value}
-    Variable names: ${TM_FILENAME} ${TM_SELECTED_TEXT} ${CLIPBOARD}
-    Variable with default: ${name:unknown} ${var:default value}
-    Choice placeholders: ${1|one,two,three|} ${2|apple,banana,orange|}
-    Nested placeholders: ${1:outer ${2:inner} text}
-    Mixed content: ${1:start} some text $2 middle ${3:end}
-    Escaped dollar: $$ = literal dollar sign
     ]]></body>
   </item>
 </root>
