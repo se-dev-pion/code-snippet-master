@@ -1,5 +1,5 @@
 import vscode from 'vscode';
-import { CommandID } from '../common/enums';
+import { CommandID, FileExtNames } from '../common/enums';
 import { Command } from './common/templates';
 import { loadSnippetConfig } from '../logics/parser';
 import { loadedConfigsDataProvider, SnippetConfigItem } from '../logics/config';
@@ -15,7 +15,7 @@ export default {
                     canSelectFolders: false,
                     canSelectMany: false,
                     filters: {
-                        'Snippet Configs': ['snippet.xml']
+                        'Snippet Configs': [FileExtNames.SnippetConfig]
                     }
                 })
             )?.at(0);

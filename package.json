@@ -37,6 +37,11 @@
         "command": "code-snippet-master.reload-config",
         "title": "Reload",
         "icon": "$(refresh)"
+      },
+      {
+        "command": "code-snippet-master.import-config",
+        "title": "Import",
+        "icon": "$(sign-in)"
       }
     ],
     "menus": {
@@ -48,6 +53,11 @@
         },
         {
           "command": "code-snippet-master.force-sync",
+          "when": "view == code-snippet-master.loaded-configs",
+          "group": "navigation"
+        },
+        {
+          "command": "code-snippet-master.import-config",
           "when": "view == code-snippet-master.loaded-configs",
           "group": "navigation"
         }
@@ -146,6 +156,7 @@
   },
   "dependencies": {
     "fast-xml-parser": "^5.3.7",
+    "json5": "^2.2.3",
     "neverthrow": "^8.2.0",
     "zod": "^4.3.6"
   }

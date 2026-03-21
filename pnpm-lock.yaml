@@ -11,6 +11,9 @@ importers:
       fast-xml-parser:
         specifier: ^5.3.7
         version: 5.3.7
+      json5:
+        specifier: ^2.2.3
+        version: 2.2.3
       neverthrow:
         specifier: ^8.2.0
         version: 8.2.0

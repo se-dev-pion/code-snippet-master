@@ -29,6 +29,7 @@ export function buildCompletionItem(config: SnippetConfigItem, language: string)
         text.replaceAll(/(?<!\/\*)\$.*?(?!\*\/)/g, '\\$&').replaceAll(placeholderMatch, '$1')
     );
     snippet.detail = config.description;
+    // TODO
     return snippet;
 }
 
