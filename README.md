@@ -12,6 +12,8 @@ PS: [Felix](https://github.com/FelixHajimi) provides the idea of this product, i
 
 1. Load a snippet config.![load_config.gif](https://raw.githubusercontent.com/se-dev-pion/code-snippet-master/refs/heads/main/images/load_config.gif)
 
-2. Reload a snippet Config.![reload_config.gif](https://raw.githubusercontent.com/se-dev-pion/code-snippet-master/refs/heads/main/images/reload_config.gif)
+2. Import a code-snippets config.![import_config.gif](https://raw.githubusercontent.com/se-dev-pion/code-snippet-master/refs/heads/main/images/import_config.gif)
 
-3. Sync snippet configs from other devices.![sync_data.gif](https://raw.githubusercontent.com/se-dev-pion/code-snippet-master/refs/heads/main/images/sync_data.gif)
+3. Reload a snippet Config.![reload_config.gif](https://raw.githubusercontent.com/se-dev-pion/code-snippet-master/refs/heads/main/images/reload_config.gif)
+
+4. Sync snippet configs from other devices.![sync_data.gif](https://raw.githubusercontent.com/se-dev-pion/code-snippet-master/refs/heads/main/images/sync_data.gif)
