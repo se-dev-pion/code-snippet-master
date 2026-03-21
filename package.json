@@ -75,6 +75,13 @@
         }
       ]
     },
+    "viewsWelcome": [
+      {
+        "contents": "[Load a Snippet Config](command:code-snippet-master.load-config)\n[Import Code Snippets](command:code-snippet-master.import-config)",
+        "view": "code-snippet-master.loaded-configs",
+        "when": "!code-snippet-master.loaded-configs.hasItems"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
