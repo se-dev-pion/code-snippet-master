@@ -4,8 +4,8 @@ import { debounced } from '../common/utils';
 
 export function addHighlightToPlaceholders(context: vscode.ExtensionContext) {
     const placeholderDecoration = vscode.window.createTextEditorDecorationType({
-        color: new vscode.ThemeColor('editor.background'),
-        backgroundColor: new vscode.ThemeColor('editor.foreground'),
+        color: new vscode.ThemeColor('editor.foreground'),
+        backgroundColor: new vscode.ThemeColor('editor.selectionHighlightBackground'),
         fontWeight: 'bold'
     });
     const updateDecorations = debounced(() => {
