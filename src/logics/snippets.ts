@@ -2,8 +2,6 @@ import vscode from 'vscode';
 import { SnippetConfigItem } from './schema';
 import { cdataPropName } from '../common/utils';
 
-const placeholderMatch = /\/\*(\$.*?)\*\//g;
-
 export function buildCompletionItem(config: SnippetConfigItem, language: string) {
     if (![language, '*'].includes(config.body['@_scope'])) {
         return;
@@ -30,7 +28,11 @@ export function buildCompletionItem(config: SnippetConfigItem, language: string)
         })
         .join('\n');
     snippet.insertText = new vscode.SnippetString(
-        text.replaceAll(/(?<!\/\*)\$.*?(?!\*\/)/g, '\\$&').replaceAll(placeholderMatch, '$1')
+        text.replaceAll(
+            /(\/\*\$.*?\*\/)|(\$\w+)/g,
+            (match: string, group1?: string, group2?: string) =>
+                group1 ? group1.slice(2, -2) : group2 ? '\\' + group2 : match
+        )
     );
     snippet.detail = config.description;
     const doc = new vscode.MarkdownString();
@@ -46,7 +48,7 @@ export function extractPlaceholderAreas(document: vscode.TextDocument) {
     const ranges = new Array<vscode.Range>();
     for (let lineNumber = 0; lineNumber < document.lineCount; lineNumber++) {
         const line = document.lineAt(lineNumber);
-        const placeholders = line.text.matchAll(placeholderMatch);
+        const placeholders = line.text.matchAll(/(\/\*\$.*?\*\/)/g);
         for (const placeholder of placeholders) {
             const start = placeholder.index;
             const end = start + placeholder[0].length;
