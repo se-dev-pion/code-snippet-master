@@ -2,6 +2,11 @@
 
 All notable changes to the "code-snippet-master" extension will be documented in this file.
 
+## [v0.2.1]
+
+- Feature: [clear cursor](https://github.com/se-dev-pion/code-snippet-master/issues/31)
+- Fix: [textmate placeholder error](https://github.com/se-dev-pion/code-snippet-master/issues/32)
+
 ## [v0.2.0]
 
 - Feature: [prevent misoperation](https://github.com/se-dev-pion/code-snippet-master/issues/27)
